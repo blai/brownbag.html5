@@ -1,26 +1,20 @@
 mediator = require 'mediator'
 Application = require 'chaplin/application'
-SessionController = require 'controllers/session_controller'
-NavigationController = require 'controllers/navigation_controller'
-SidebarController = require 'controllers/sidebar_controller'
+BrownbagController = require 'controllers/brownbag_controller'
 routes = require 'routes'
 support = require 'chaplin/lib/support'
 
 # The application bootstrapper.
-module.exports = class TwitterApplication extends Application
-  title: 'Tweet your brunch'
+module.exports = class BrownbagApplication extends Application
+  title: 'Siberia Brownbag'
 
   initialize: ->
-    #console.debug 'ExampleApplication#initialize'
-
     super # This creates the AppController and AppView
 
     # Instantiate common controllers
     # ------------------------------
 
-    new SessionController()
-    new NavigationController()
-    new SidebarController()
+    new BrownbagController()
 
     # Initialize the router
     # ---------------------

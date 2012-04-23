@@ -38,7 +38,7 @@ exports.config =
         after: []
 
     templates:
-      defaultExtension: 'eco'
+      defaultExtension: 'hbs'
       joinTo: 'javascripts/app.js'
 
   # Change this if you're using something other than backbone (e.g. 'ember').
