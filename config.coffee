@@ -1,7 +1,7 @@
 exports.config =
   # Edit the next line to change default build path.
   paths:
-    public: 'public'
+    public: '../brownbag.html5.public'
 
   files:
     javascripts:
