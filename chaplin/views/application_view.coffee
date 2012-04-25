@@ -20,13 +20,6 @@ module.exports = class ApplicationView # This class does not extend View
     # Starting and disposing of controllers
     @subscribeEvent 'beforeControllerDispose', @hideOldView
     @subscribeEvent 'startupController', @showNewView
-    @subscribeEvent 'startupController', @removeFallbackContent
-    @subscribeEvent 'startupController', @adjustTitle
-
-    # Login and logout
-    @subscribeEvent 'loginStatus', @updateBodyClasses
-
-    @updateBodyClasses()
     @addDOMHandlers()
 
   # Controller startup and disposal
@@ -48,38 +41,6 @@ module.exports = class ApplicationView # This class does not extend View
     view = context.controller.view
     if view
       view.$el.css display: 'block', opacity: 1, visibility: 'visible'
-
-  # Handler for the global startupController event
-  # Change the document title to match the new controller
-  # Get the title from the title property of the current controller
-  adjustTitle: (context) ->
-    #console.debug 'ApplicationView#adjustTitle', context
-    title = @title
-    subtitle = context.controller.title
-    title = "#{subtitle} \u2013 #{title}" if subtitle
-    # Internet Explorer < 9 workaround
-    setTimeout (-> document.title = title), 50
-
-  # Logged-in / logged-out classes for the body element
-  # ---------------------------------------------------
-
-  updateBodyClasses: (loggedIn) ->
-    $(document.body)
-      .toggleClass('logged-out', not loggedIn)
-      .toggleClass('logged-in', loggedIn)
-
-  # Fallback content
-  # ----------------
-
-  # After the first controller has been started, remove all accessible
-  # content so the DOM is less complex and images and video do not lie
-  # in the background
-  removeFallbackContent: ->
-    # Hide fallback content and the loading screens
-    $('.accessible-fallback').remove()
-
-    # Remove the handler after the first startupController event
-    @unsubscribeEvent 'startupController', @removeFallbackContent
 
   # DOM Event handling
   # ------------------

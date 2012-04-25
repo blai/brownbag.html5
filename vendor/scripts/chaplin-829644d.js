@@ -1371,10 +1371,6 @@
       this.title = options.title;
       this.subscribeEvent('beforeControllerDispose', this.hideOldView);
       this.subscribeEvent('startupController', this.showNewView);
-      this.subscribeEvent('startupController', this.removeFallbackContent);
-      this.subscribeEvent('startupController', this.adjustTitle);
-      this.subscribeEvent('loginStatus', this.updateBodyClasses);
-      this.updateBodyClasses();
       this.addDOMHandlers();
     }
 
@@ -1395,25 +1391,6 @@
           visibility: 'visible'
         });
       }
-    };
-
-    ApplicationView.prototype.adjustTitle = function(context) {
-      var subtitle, title;
-      title = this.title;
-      subtitle = context.controller.title;
-      if (subtitle) title = "" + subtitle + " \u2013 " + title;
-      return setTimeout((function() {
-        return document.title = title;
-      }), 50);
-    };
-
-    ApplicationView.prototype.updateBodyClasses = function(loggedIn) {
-      return $(document.body).toggleClass('logged-out', !loggedIn).toggleClass('logged-in', loggedIn);
-    };
-
-    ApplicationView.prototype.removeFallbackContent = function() {
-      $('.accessible-fallback').remove();
-      return this.unsubscribeEvent('startupController', this.removeFallbackContent);
     };
 
     ApplicationView.prototype.addDOMHandlers = function() {
