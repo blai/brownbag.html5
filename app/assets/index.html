@@ -38,7 +38,7 @@
 			<img class="fit-image" src="images/uneven.ground.1.jpeg" />
 		</div>
 		<div class="step slide" data-x="0" data-y="-1500">
-			<h1>Tech stack</h1>
+			<h1>Tech stack (at a glance)</h1>
 			<div class="stack">
 				<div><a href="http://coffeescript.org/">CoffeeScript</a></div>
 				<div><a href="http://maxtaco.github.com/coffee-script/">IcedCoffeeScript</a></div>
@@ -113,18 +113,105 @@
 		<div class="step slide" data-x="2000" data-y="-1500">
 			<h1>Application Frameworks</h1>
 			<ul>
-				<li>Highly extensible</li>
+				<li>Highly extensible and Light weight</li>
 				<li>Minimal DOM dependency</li>
-				<li>Light weight</li>
 				<li>Separation of concerns</li>
+				<li>Active development</li>
 				<li>Options
 					<ul>
-						<li><a href=""></a></li>
+						<li><a href="http://emberjs.com/">Ember.js (SproutCore 2)</a></li>
+						<li><a href="http://knockoutjs.com/">Knockout.js</a></li>
+						<li><a href="http://spinejs.com/">Spine.js</a></li>
+						<li><a href="http://www.sencha.com/products/extjs">ExtJs</a></li>
+						<li><a href="http://yuilibrary.com/">YUI 3</a></li>
 					</ul>
 				</li>
 			</ul>
 		</div>
 		<div class="step slide" data-x="3000" data-y="-1500">
+			<h1>Application Frameworks (cont.)</h1>
+			<ul>
+				<li>Ember.js
+					<ul>
+						<li>SproutCore 1 is used by Apple to build iCloud, but SproutCore 1 and Ember are 2 animals now after some <a href="http://stackoverflow.com/questions/9425307/differences-between-sproutcore-and-ember">historical change</a></li>
+						<li>In short: Ember is like an opinionated version of Backbone.js. In general this means you will end up with similar coding structure, with less coding on the Ember version on some common task, and more coding to hack the Ember version for complex cases.</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="4000" data-y="-1500">
+			<h1>Application Frameworks (cont.)</h1>
+			<ul>
+				<li>Knockout.js
+					<ul>
+						<li>Best documentation and tutorial of all</li>
+						<li>Smaller learning curve, really just need to learn one thing: "data-bind"</li>
+						<li>Concentration of concerns (as oppose to separation of concerns), you basically piled up all connection logic in "data-bind"</li>
+						<li>Perfect fit for one man / contracting projects</li>
+						<li>Performance concern caused by data-bind, data-bind could become maintenance nightmare for large project over time</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="5000" data-y="-1500">
+			<h1>Application Frameworks (cont.)</h1>
+			<ul>
+				<li>ExtJs
+					<ul>
+						<li>More traction to giant enterprise customers (like HP) as it comes with: tech support, training, commercial licensing (@Alex, are you sold? :P)</li>
+						<li>Comes with many pre-built components (including charting)</li>
+					</ul>
+				</li>
+				<li>YUI
+					<ul>
+						<li>Y for Yahoo!</li>
+						<li>While YUI may not have the best reputation of all, its one-stop-shop style to solve your javascript/css/html problem as a whole does deserve a thumb up</li>
+						<li><a href="http://alloy.liferay.com/">A nice framework</a> extending from YUI3</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="6000" data-y="-1500">
+			<h1>Application Frameworks (cont.)</h1>
+			<ul>
+				<li>Spine.js
+					<ul>
+						<li>Built using CoffeeScript (small code base)</li>
+						<li>MVC architecture, very similar to Backbone in many ways, with the addtion of Controller</li>
+						<li>Built in localStorage (so you can build an app without a backend at all, good feature for mobile app, though framework such as Backbone has plugin to do the same)</li>
+						<li>Choosing this is a matter of taste IMO</li>
+					</ul>
+				</li>
+				<li>Not enough? <a href="http://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks">Here</a>'s a bigger list</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="7000" data-y="-1500">
+			<h1>Application Frameworks (cont.)</h1>
+			<ul>
+				<li>Backbone.js
+					<ul>
+						<li>Extremely flexible / extensible</li>
+						<li>Concept of Collection (on top of Model in MVC) to handle object sets</li>
+						<li>Provides a foundation but does not have opinion on how you should do things.</li>
+						<li>Proven by many large projects</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="8000" data-y="-1500">
+			<h1>Application Frameworks (cont.)</h1>
+			<ul>
+				<li>Backbone.js (cont.)
+					<ul>
+						<li> Promotes separation of concern, resulting in fragmented file structure, so use of an extension as application framework is recommended:</li>
+						<li><a href="http://walmartlabs.github.com/lumbar/">Lumbar</a>/<a href="http://walmartlabs.github.com/thorax/">Thorax</a> and its <a href="http://functionsource.com/post/lumbar-support-for-your-thorax-introducing-an-opinionated-backbone-application-framework">motivation</a></li>
+						<li><a href="https://github.com/moviepilot/chaplin">Chaplin</a></li>
+						<li><a href="http://derickbailey.github.com/backbone.marionette/">Marionette</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="9000" data-y="-1500">
 			<h1>Application Frameworks (cont.)</h1>
 			<ul>
 				<li>My pick: Bacokbone (strong buy)
@@ -135,6 +222,122 @@
 						<li>Deeplink routing support</li>
 					</ul>
 				</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="10000" data-y="-1500">
+			<h1>CSS Preprocessor</h1>
+			<ul>
+				<li>Feature: they pretty much do the <a href="http://net.tutsplus.com/tutorials/html-css-techniques/sass-vs-less-vs-stylus-a-preprocessor-shootout/">same thing</a></li>
+				<li><a href="http://tjholowaychuk.com/post/5002088731/stylus-vs-sass-vs-less-error-reporting">Error reporting</a>: Do I need to tell you how frustrated it is to dig out a css error that fails silently in browser</li>
+				<li>Options
+					<ul>
+						<li><a href="http://sass-lang.com/">Sass</a></li>
+						<li><a href="http://lesscss.org/">LESS (I think this is the oldest one)</a></li>
+						<li><a href="http://learnboost.github.com/stylus/">Stylus</a></li>
+					</ul>
+				</li>
+				<li>My pick: Stylus wins by a hair by outstanding in Error reporting (strong buy)</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="11000" data-y="-1500">
+			<h1>JavaScript Preprocessor</h1>
+			<ul>
+				<li><a href="http://coffeescript.org/">CoffeeScript</a> (pros)
+					<ul>
+						<li>Clean / readable code, do more with less typing (10 - 40% code reduction)</li>
+						<li>Help avoid common JavaScript pitfalls (e.g. Avoid use of "with" block)</li>
+						<li>Emerging community (and very active)</li>
+						<li>Close to 1 : 1 translation to JavaScript (by the way, the generated script is fairly readable)</li>
+						<li>Close to 1 : 1 performance, for average dev, it actually perform better</li>
+						<li>Proven to work across browser</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="12000" data-y="-1500">
+			<h1>JavaScript Preprocessor (cont.)</h1>
+			<ul>
+				<li><a href="http://coffeescript.org/">CoffeeScript</a> (cons)
+					<ul>
+						<li>Steeper learning curve (for those who already know JavaScript, but who does not know JavaScript???)</li>
+						<li>Does not follow any standard specification (e.g. JavaScript follows ECMAScript spec).</li>
+						<li><a href="http://arcturo.github.com/library/coffeescript/07_the_bad_parts.html">Pitfalls</a></li>
+						<li>Too many variations of coding style! (make it hard to do team work). <a href="https://github.com/polarmobile/coffeescript-style-guide">Solution is to follow a code style guide</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="13000" data-y="-1500">
+			<h1>JavaScript Preprocessor (cont.)</h1>
+			<ul>
+				<li>My pick: use CoffeeScipt (buy to strong buy)
+					<ul>
+						<li>It really took me less than 1 hour to learn</li>
+						<li>Those hard to debug case happened just a few times, and never show up again once I know why it happens</li>
+						<li>Since CoffeeScript compiles to JavaScript, you can always drop it even if you started with it. But this does not happen the other way around</li>
+						<li>If you drink coffee, you might as well pick the <a href="http://maxtaco.github.com/coffee-script/">cooler one</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="14000" data-y="-1500">
+			<h1>Additional CSS goodies</h1>
+			<ul>
+				<li><a href="http://lessframework.com/">LessFramework</a>: Layout framework with handheld device in mind</li>
+				<li><a href="http://baselinecss.com/">BaselineCSS</a>: typographic layout framework</li>
+				<li><a href="http://code.google.com/p/css3-action-framework/">Effect by CSS</a></li>
+				<li><a href="http://code.google.com/p/blueprintcss/">Blueprint</a><a href="http://960.gs/">960 Grid</a><a href="http://www.yaml.de/">YaML.de</a><a href="http://yuilibrary.com/yui/docs/cssgrids/">YUI grid</a><a href="http://52framework.com/">52Framework</a></li>
+				<li><a href="http://speckyboy.com/2011/01/10/15-lightweight-and-minimal-css-frameworks/">And a bunch more</a></li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="15000" data-y="-1500">
+			<h1>Additional JavaScript goodies</h1>
+			<ul>
+				<li><a href="http://leaverou.github.com/prefixfree/">-prefix-free</a>: Cross browser CSS mainpulation toolkit</li>
+				<li><a href="http://momentjs.com/">MomentJs</a>: lightweight date lib</li>
+				<li><a href="https://github.com/madrobby/keymaster/">Keymaster</a>: Keyboard shortcut framework</li>
+				<li><a href="http://afarkas.github.com/webshim/demos/">Webshim</a>: Polyfill loading lib (remember the uneven ground we have?)</li>
+				<li><a href="http://www.caniuse.com/">Can I use?</a>: the "go to" reference when you are not sure if a feature is supported by a browser</li>
+				<li><a href="https://github.com/westonruter/webforms2">Webform2</a>: another polyfill for the missing pieces between HTML5 form implementation on various browsers</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="16000" data-y="-1500">
+			<h1>JS templating framework</h1>
+			<ul>
+				<li>"Use" + " this " + " unless y" + "ou like" + " string" + "concatenation b" + "e" + "tt" + "e"+"r"</li>
+				<li>Performance is the key (how many times do you think these templates would be renderered?)</li>
+				<li>Feature is important too</li>
+				<li>
+					<ul>
+						<li><a href="http://jade-lang.com/">Jade</a></li>
+						<li><a href="https://github.com/olado/doT">doT / doU</a></li>
+						<li><a href="http://mustache.github.com/">Mustache</a> Not the ones on our wall, but this is popular too</li>
+						<li><a href="http://handlebarsjs.com/">HandlebarsJs</a>: all Mustache template would work if you use Handlebars</li>
+						<li><a href="http://akdubya.github.com/dustjs/">Dust</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="17000" data-y="-1500">
+			<h1>JS templating framework (cont.)</h1>
+			<ul>
+				<li>My pick: Handlebars (buy)
+					<ul>
+						<li>Performans well (doT performans even better)</li>
+						<li>Popular, so lots of supports and examples</li>
+						<li>Feature rich</li>
+						<li>Default for some packaging system</li>
+						<li>More on performance comparison: <a href="http://jsperf.com/dom-vs-innerhtml-based-templating/281">here</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="18000" data-y="-1500">
+			<h1>Some more must read stuff</h1>
+			<ul>
+				<li>The <a href="http://whereswalden.com/2011/01/24/new-es5-strict-mode-requirement-function-statements-not-at-top-level-of-a-program-or-function-are-prohibited/">ugly</a> side of JavaScript</li>
+				<li>Still following? The how about <a href="http://kangax.github.com/nfe/">this</a>?</li>
+				<li>If the above two didn't make you feel like you never know JavaScript, maybe some of <a href="http://bonsaiden.github.com/JavaScript-Garden/">these</a> will</li>
 			</ul>
 		</div>
 	</div>
