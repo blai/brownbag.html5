@@ -81,7 +81,7 @@
 (this.require.define({
   "application": function(exports, require, module) {
     (function() {
-  var Application, BrownbagApplication, BrownbagController, mediator, routes, support,
+  var Application, BrownbagApplication, ImpressController, mediator, routes, support,
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
@@ -89,7 +89,7 @@
 
   Application = require('chaplin/application');
 
-  BrownbagController = require('controllers/brownbag_controller');
+  ImpressController = require('controllers/impress_controller');
 
   routes = require('routes');
 
@@ -107,7 +107,7 @@
 
     BrownbagApplication.prototype.initialize = function() {
       BrownbagApplication.__super__.initialize.apply(this, arguments);
-      new BrownbagController();
+      new ImpressController;
       this.initRouter(routes, {
         pushState: false
       });
@@ -185,6 +185,40 @@
   }
 }));
 (this.require.define({
+  "controllers/impress_controller": function(exports, require, module) {
+    (function() {
+  var Controller, ImpressController, ImpressView, mediator,
+    __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+  Controller = require('./controller');
+
+  mediator = require('mediator');
+
+  ImpressView = require('views/impress_view');
+
+  module.exports = ImpressController = (function(_super) {
+
+    __extends(ImpressController, _super);
+
+    function ImpressController() {
+      ImpressController.__super__.constructor.apply(this, arguments);
+    }
+
+    ImpressController.prototype.initialize = function() {
+      ImpressController.__super__.initialize.apply(this, arguments);
+      return this.view = new ImpressView;
+    };
+
+    return ImpressController;
+
+  })(Controller);
+
+}).call(this);
+
+  }
+}));
+(this.require.define({
   "initialize": function(exports, require, module) {
     (function() {
   var Application;
@@ -215,13 +249,13 @@
       }
     },
     translate: function(t) {
-      return " translate3d(" + t.x + "px, " + t.y + "px, " + t.z + "px) ";
+      return " translate3d(" + t.x + "px," + t.y + "px," + t.z + "px) ";
     },
     rotate: function(r, revert) {
       var rX, rY, rZ;
       rX = " rotateX(" + r.x + "deg) ";
-      rY = " rotateX(" + r.y + "deg) ";
-      rZ = " rotateX(" + r.z + "deg) ";
+      rY = " rotateY(" + r.y + "deg) ";
+      rZ = " rotateZ(" + r.z + "deg) ";
       if (revert) {
         return rZ + rY + rX;
       } else {
@@ -229,7 +263,7 @@
       }
     },
     scale: function(s) {
-      return " scale (" + s + ") ";
+      return " scale(" + s + ") ";
     },
     perspective: function(p) {
       return " perspective(" + p + "px) ";
@@ -239,10 +273,31 @@
       hScale = window.innerHeight / config.height;
       wScale = window.innerWidth / config.width;
       scale = Math.min(hScale, wScale);
-      if ((config.maxScale != null) < scale) scale = config.maxScale;
-      if ((config.minScale != null) > scale) scale = config.minScale;
+      if (config.maxScale && config.maxScale < scale) scale = config.maxScale;
+      if (config.minScale && config.minScale > scale) scale = config.minScale;
       return scale;
-    }
+    },
+    pfx: (function() {
+      var memory, prefixes, style;
+      style = document.createElement("dummy").style;
+      prefixes = "Webkit Moz 0 ms Khtml".split(" ");
+      memory = {};
+      return function(prop) {
+        var i, props, ucProp;
+        if (typeof memory[prop] === "undefined") {
+          ucProp = prop.charAt(0).toUpperCase() + prop.substr(1);
+          props = (prop + " " + prefixes.join(ucProp + " ") + ucProp).split(" ");
+          memory[prop] = null;
+          for (i in props) {
+            if (style[props[i]] !== void 0) {
+              memory[prop] = props[i];
+              break;
+            }
+          }
+        }
+        return memory[prop];
+      };
+    })()
   };
 
   if (typeof Object.freeze === "function") Object.freeze(CSS3D);
@@ -684,6 +739,7 @@
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         shortcut = _ref[_i];
+        shortcut.method = _.bind(shortcut.method, this);
         _results.push(KeyMaster(shortcut.key, shortcut.scope, shortcut.method));
       }
       return _results;
@@ -1016,9 +1072,10 @@
   }
 }));
 (this.require.define({
-  "views/impress": function(exports, require, module) {
+  "views/impress_view": function(exports, require, module) {
     (function() {
   var CSS3D, ImpressView, View, mediator,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
@@ -1033,6 +1090,8 @@
     __extends(ImpressView, _super);
 
     function ImpressView() {
+      this.onHashchange = __bind(this.onHashchange, this);
+      this.onResize = __bind(this.onResize, this);
       ImpressView.__super__.constructor.apply(this, arguments);
     }
 
@@ -1058,7 +1117,11 @@
 
     ImpressView.prototype.lastEntered = null;
 
+    ImpressView.prototype.lastHash = null;
+
     ImpressView.prototype.initialize = false;
+
+    ImpressView.prototype.stepEnterTimeout = null;
 
     ImpressView.prototype.defaults = {
       width: 1024,
@@ -1069,17 +1132,24 @@
       transitionDuration: 1000
     };
 
+    ImpressView.prototype.shortcuts = {
+      'left': 'prev',
+      'right': 'next',
+      '⌥ + n': 'next'
+    };
+
     ImpressView.prototype.initialize = function() {
-      var config, currentState, windowScale,
-        _this = this;
-      config = _.defaults(this.$el.dataset, this.defaults);
-      windowScale = this.computeWindowScale(config);
+      var _this = this;
+      this.config = _.defaults(this.el.dataset, this.defaults);
+      this.windowScale = this.computeWindowScale(this.config);
+      this.isSupport();
       this.initCanvas();
-      this.adjustStyles(config, windowScale);
-      this.$(".step").each(function(index, element) {
-        return _this.initStep(element);
+      this.adjustStyles(this.config, this.windowScale);
+      this.steps = this.$(".step");
+      this.steps.each(function(index, element) {
+        return _this.initStep(element, index);
       });
-      currentState = {
+      this.currentState = {
         translate: {
           x: 0,
           y: 0,
@@ -1092,14 +1162,34 @@
         },
         scale: 1
       };
-      this.$el.trgger("impress:init");
+      this.$el.trigger("impress:init");
+      this.initStepStates();
+      this.initEnv();
       return ImpressView.__super__.initialize.apply(this, arguments);
     };
 
+    ImpressView.prototype.isSupport = function() {
+      var $body, body, impressSupported, ua;
+      body = document.body;
+      ua = navigator.userAgent.toLowerCase();
+      impressSupported = (this.pfx("perspective")) !== null && body.classList && body.dataset;
+      $body = $(body);
+      if (impressSupported) {
+        $body.removeClass("impress-not-supported");
+        $body.addClass("impress-supported");
+        return true;
+      } else {
+        $body.addClass("impress-not-supported");
+        return false;
+      }
+    };
+
     ImpressView.prototype.initCanvas = function() {
-      this.canvas = make("div");
-      this.$(".step").wrapAll(this.canvas);
-      return this.$canvas = this.$(this.canvas);
+      this.$(".step").wrapAll(this.make("div", {
+        id: "stepCanvas"
+      }));
+      this.$canvas = this.$("#stepCanvas");
+      return this.canvas = this.$canvas[0];
     };
 
     ImpressView.prototype.adjustStyles = function(config, windowScale) {
@@ -1121,18 +1211,18 @@
         transformStyle: "preserve-3d"
       };
       this.$canvas.css(rootStyles);
-      _.extend(rootStyles({
+      _.extend(rootStyles, {
         top: "50%",
         left: "50%",
         transform: this.perspective(config.perspective / windowScale) + this.scale(windowScale)
-      }));
+      });
       return this.$el.css(rootStyles);
     };
 
     ImpressView.prototype.onStepEnter = function(step) {
       var lastEntered;
       if (lastEntered !== step) {
-        $(step).trigger("impress:stepenter");
+        this.$(step).trigger("impress:stepenter");
         return lastEntered = step;
       }
     };
@@ -1140,7 +1230,7 @@
     ImpressView.prototype.onStepLeave = function(step) {
       var lastEntered;
       if (lastEntered === step) {
-        $(step).trigger("impress:stepleave");
+        this.$(step).trigger("impress:stepleave");
         return lastEntered = null;
       }
     };
@@ -1163,12 +1253,148 @@
         el: el
       };
       if (!el.id) el.id = "step-" + (idx + 1);
-      stepsData["impress-" + el.id] = step;
+      this.stepsData["impress-" + el.id] = step;
       return $(el).css({
         position: "absolute",
         transform: "translate(-50%, -50%)" + (this.translate(step.translate)) + (this.rotate(step.rotate)) + (this.scale(step.scale)),
         transformStyle: "preserve-3d"
       });
+    };
+
+    ImpressView.prototype.getStep = function(step) {
+      if (_(step).isNumber()) {
+        step = step < 0 ? this.steps[this.steps.length + step] : this.steps[step];
+      } else if (_(step).isString()) {
+        step = (this.$(step))[0];
+      } else if (step instanceof jQuery) {
+        step = step[0];
+      }
+      if ((step != null ? step.id : void 0) && this.stepsData["impress-" + step.id]) {
+        return step;
+      } else {
+        return null;
+      }
+    };
+
+    ImpressView.prototype.goto = function(el, duration) {
+      var $activeStep, $body, $el, currentStateValues, delay, step, target, targetScale, targetValues, zoomin,
+        _this = this;
+      if (!(el = this.getStep(el))) return false;
+      window.scrollTo(0, 0);
+      step = this.stepsData["impress-" + el.id];
+      $el = this.$(el);
+      $body = $(document.body);
+      if (this.activeStep) {
+        $activeStep = this.$(this.activeStep);
+        $activeStep.removeClass("active");
+        $body.removeClass("impress-on-" + this.activeStep.id);
+      }
+      $el.addClass("active");
+      $body.addClass("impress-on-" + el.id);
+      target = {
+        rotate: {
+          x: -step.rotate.x,
+          y: -step.rotate.y,
+          z: -step.rotate.z
+        },
+        translate: {
+          x: -step.translate.x,
+          y: -step.translate.y,
+          z: -step.translate.z
+        },
+        scale: 1 / step.scale
+      };
+      zoomin = target.scale >= this.currentState.scale;
+      duration = this.toNumber(duration, this.config.transitionDuration);
+      delay = duration / 2;
+      if (el === this.activeStep) {
+        this.windowScale = this.computeWindowScale(this.config);
+      }
+      targetScale = target.scale * this.windowScale;
+      if ((this.activeStep != null) !== el) this.onStepLeave(this.activeStep);
+      this.$el.css({
+        transform: (this.perspective(this.config.perspective / targetScale)) + (this.scale(targetScale)),
+        transitionDuration: duration + "ms",
+        transitionDelay: (zoomin ? delay : 0) + "ms"
+      });
+      this.$canvas.css({
+        transform: (this.rotate(target.rotate, true)) + (this.translate(target.translate)),
+        transitionDuration: duration + "ms",
+        transitionDelay: (zoomin ? 0 : delay) + "ms"
+      });
+      currentStateValues = [this.currentState.scale, this.currentState.rotate.x, this.currentState.rotate.y, this.currentState.rotate.z, this.currentState.translate.x, this.currentState.translate.y, this.currentState.translate.z];
+      targetValues = [target.scale, target.rotate.x, target.rotate.y, target.rotate.z, target.translate.x, target.translate.y, target.translate.z];
+      if (!(currentStateValues > targetValues || targetValues > currentStateValues)) {
+        delay = 0;
+      }
+      this.currentState = target;
+      this.activeStep = el;
+      clearTimeout(this.stepEnterTimeout);
+      this.stepEnterTimeout = setTimeout((function() {
+        return _this.onStepEnter(_this.activeStep);
+      }), duration + delay);
+      return el;
+    };
+
+    ImpressView.prototype.prev = function() {
+      var prev;
+      prev = this.steps.index(this.activeStep) - 1;
+      prev = prev >= 0 ? this.steps[prev] : this.steps[this.steps.length - 1];
+      return this.goto(prev);
+    };
+
+    ImpressView.prototype.next = function() {
+      var next;
+      next = this.steps.index(this.activeStep) + 1;
+      next = next < this.steps.length ? this.steps[next] : this.steps[0];
+      return this.goto(next);
+    };
+
+    ImpressView.prototype.initStepStates = function() {
+      var el, step, _i, _len, _ref;
+      _ref = this.steps;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        step = _ref[_i];
+        this.$(step).addClass("future");
+      }
+      this.delegate("impress:stepenter", this.enterStep);
+      this.delegate("impress:stepleave", this.leaveStep);
+      el = this.$(window.location.hash.replace(/^#\/?/));
+      el = el.length === 0 ? this.steps[0] : el[0];
+      return this.goto(el, 0);
+    };
+
+    ImpressView.prototype.initEnv = function() {
+      var $w;
+      $w = $(window);
+      $w.on("resize", _.throttle(this.onResize, 250));
+      return $w.on("hashchange", this.onHashchange);
+    };
+
+    ImpressView.prototype.enterStep = function(event) {
+      var $step;
+      $step = this.$(event.target);
+      $step.removeClass("past");
+      $step.removeClass("future");
+      $step.addClass("present");
+      return window.location.hash = "#/" + event.target.id;
+    };
+
+    ImpressView.prototype.leaveStep = function(event) {
+      var $step;
+      $step = this.$(event.target);
+      $step.removeClass("present");
+      return $step.addClass("past");
+    };
+
+    ImpressView.prototype.onResize = function(event) {
+      return this.goto(this.activeStep, 500);
+    };
+
+    ImpressView.prototype.onHashchange = function(event) {
+      var step;
+      step = window.location.hash.replace(/^#\/?/, "");
+      return this.goto(step, 0);
     };
 
     return ImpressView;
