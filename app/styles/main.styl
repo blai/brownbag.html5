@@ -6,10 +6,132 @@ $gray = #999
 $white = #fff
 
 *
-  box-sizing: border-box
-  outline: none
+	box-sizing: border-box
+	outline: none
+	transition: 0.5s
+
+b, strong
+	font-weight: bold
+
+i, em
+	font-style: italic
 
 body
-  padding: 20px
-  background-color: #352726
+	padding: 20px
+	font-family: 'PT Sans', sans-serif
+	min-height: 740px
 
+	background: rgb(215, 215, 215)
+	background: radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190))
+
+a
+	color: inherit
+	text-decoration: none
+	text-shadow: -1px -1px 2px rgba(100,100,100,0.9)
+	transition: 0.5s
+	padding-left: 20px
+	background: url('../images/icons/19.png') 0 50% no-repeat
+	
+	// &.link
+	// 	padding-left: 1.25em
+	// 	background: url('../images/icons/60.png') 0 50% no-repeat
+
+	&:focus, &:hover
+		color: #369
+
+h1
+	text-align: center
+	font-size: 1.9em
+	line-height: 1.9em
+
+h2
+	font-size: 1.5em
+	line-height: 1.5em
+
+ul
+	list-style-image: url('../images/icons/74.png')
+
+	li
+		font-size: 1.5em
+		line-height: 2em
+		padding-left: 1em
+
+		ul
+			list-style-image: url('../images/icons/60.png')
+
+			li
+				font-size: 0.9em
+				line-height: 1.8em
+
+.center
+	text-align: center
+
+.impress-supported .fallback-message
+	display: none
+
+.step
+	position: relative
+	width: 900px
+	padding: 40px
+	margin: 2em auto
+	box-sizing: border-box
+
+	font-family: 'PT Serif', georgia, serif
+	font-size: 1.5em
+	line-height: 1.5em
+
+.impress-enabled .step
+	margin: 0
+	opacity: 0.1
+	transition: opacity 1s
+
+	&.active
+		opacity: 1
+
+.slide
+	display: block
+
+	width: 900px
+	height: 700px
+	padding: 40px 60px
+
+	background-color: white
+	border: 1px solid rgba(0, 0, 0, .3)
+	border-radius: 10px
+	box-shadow: 0 2px 6px rgba(0, 0, 0, .1)
+
+	color: rgb(102, 102, 102)
+	text-shadow: 0 2px 2px rgba(0, 0, 0, .1)
+
+	font-family: 'Open Sans', Arial, sans-serif
+
+	q
+		display: block
+		font-size: 50px
+		line-height: 72px
+
+		margin-top: 100px
+
+		strong
+			white-space: nowrap
+
+	img
+		max-height: 500px
+
+
+.stack
+	display: box
+
+	> div
+		box-flex: 1
+		text-align: center
+		border: 3px solid rgba(200,200,200, 0.2)
+		background: rgba(200,200,200, 0.2)
+		margin: 3px
+		padding: 0.5em
+		border-radius: 3px
+
+		&:hover
+			border-color: rgba(60,120,180, 0.2)
+			background: rgba(60,120,180, 0.2)
+			color: rgba(100,150,200, 0.8)

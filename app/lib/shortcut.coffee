@@ -12,6 +12,7 @@ KeyMaster = require 'lib/keymaster'
 module.exports = Shortcuts =
   mapShortcuts: (keyMap) ->
     for shortcut in @parseShortcutMap(keyMap)
+      shortcut.method = _.bind shortcut.method, @
       #console.debug shortcut.key, shortcut.scope, shortcut.method
       KeyMaster(shortcut.key, shortcut.scope, shortcut.method)
 

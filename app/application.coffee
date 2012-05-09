@@ -1,6 +1,6 @@
 mediator = require 'mediator'
 Application = require 'chaplin/application'
-BrownbagController = require 'controllers/brownbag_controller'
+ImpressController = require 'controllers/impress_controller'
 routes = require 'routes'
 support = require 'chaplin/lib/support'
 
@@ -14,7 +14,8 @@ module.exports = class BrownbagApplication extends Application
     # Instantiate common controllers
     # ------------------------------
 
-    new BrownbagController()
+    #new BrownbagController()
+    new ImpressController
 
     # Initialize the router
     # ---------------------

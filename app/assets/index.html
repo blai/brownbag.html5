@@ -4,18 +4,139 @@
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Example brunch application</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
-  <link rel="stylesheet" href="stylesheets/app.css">
-  <script src="javascripts/vendor.js"></script>
-  <script src="javascripts/app.js"></script>
-  <script>require('initialize');</script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Example brunch application</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+	<link rel="stylesheet" href="stylesheets/app.css">
+	<script src="javascripts/vendor.js"></script>
+	<script src="javascripts/app.js"></script>
+	<script>require('initialize');</script>
 </head>
-<body>
-  <div id="content">
-  </div>
-  <div id="impress"></div>
+<body class="impress-disabled">
+	<div id="impress" class="test">
+		<div class="step slide center" data-x="-4000" data-y="-1500">
+			<h1>HTML5 &amp; CSS3, What's ahead of us?</h1>
+			<h2>An uneven ground</h2>
+			<img src="images/uneven.ground.jpg" />
+		</div>
+		<div class="step slide center" data-x="-3000" data-y="-1500">
+			<h1>HTML5 &amp; CSS3, What's ahead of us? (cont.)</h1>
+			<h2>Without the right tools, you may easily end up like this</h2>
+			<img src="images/uneven.ground.2.jpg" />
+		</div>
+		<div class="step slide center" data-x="-2000" data-y="-1500">
+			<div class="group">
+				<h1>HTML5 &amp; CSS3, What's ahead of us? (cont.)</h1>
+				<h2>Or... this</h2>
+				<img class="fit-image" src="images/uneven.ground.3.jpg" />
+			</div>
+		</div>
+		<div class="step slide center" data-x="-1000" data-y="-1500">
+			<h1>HTML5 &amp; CSS3, What's ahead of us? (cont.)</h1>
+			<h2>If you unfold the tools, you will see something like this</h2>
+			<img class="fit-image" src="images/uneven.ground.1.jpeg" />
+		</div>
+		<div class="step slide" data-x="0" data-y="-1500">
+			<h1>Tech stack</h1>
+			<div class="stack">
+				<div><a href="http://coffeescript.org/">CoffeeScript</a></div>
+				<div><a href="http://maxtaco.github.com/coffee-script/">IcedCoffeeScript</a></div>
+				<div><a href="http://brunch.io/">Brunch</a></div>
+				<div><a href="http://learnboost.github.com/stylus/">Stylus</a></div>
+			</div>
+			<div class="stack">
+				<div><a href="http://requirejs.org/">Require.js</a></div>
+				<div><a href="https://github.com/madrobby/keymaster">Keymaster</a></div>
+				<div><a href="https://github.com/moviepilot/chaplin/tree/development">Chaplin</a></div>
+				<div><a href="http://lessframework.com/">Less Framework</a></div>
+			</div>
+			<div class="stack">
+				<div><a href="http://afarkas.github.com/webshim/demos/">Webshims</a></div>
+				<div><a href="http://documentcloud.github.com/backbone/">Backbone</a></div>
+				<div><a href="http://leaverou.github.com/prefixfree/">-prefix-free</a></div>
+			</div>
+			<div class="stack">
+				<div><a href="http://jquery.com/" class="link">jQuery</a></div>
+				<div><a href="http://documentcloud.github.com/underscore/">Underscore</a></div>
+				<div><a href="http://meyerweb.com/eric/tools/css/reset/">CSS Reset</a></div>
+			</div>
+			<div class="stack">
+				<div>HTML5</div>
+				<div>CSS3</div>
+				<div>JavaScript 1.6</div>
+			</div>
+			<div class="stack">
+				<div>
+					<em>Internet Explorer</em>
+					<div class="stack">
+						<div>IE 7</div>
+						<div>IE 8</div>
+						<div>IE 9</div>
+					</div>
+				</div>
+				<div><em>Firefox 12</em></div>
+				<div>
+					<em>Webkit</em>
+					<div class="stack">
+						<div>Chrome 18</div>
+						<div>Safari 5.1</div>
+					</div>
+				</div>
+			</div>
+			<div class="stack">
+				<div>iOS</div>
+				<div>Android</div>
+				<div>Others</div>
+			</div>
+			<div class="stack">
+				<div>Desktop</div>
+				<div>Tablet</div>
+				<div>Smart Phone</div>
+			</div>
+		</div>
+		<div class="step slide" data-x="1000" data-y="-1500">
+			<h1>DOM Management Frameworks</h1>
+			<ul>
+				<li>Cross browser support</li>
+				<li>Performance</li>
+				<li><a href="http://www.domassistant.com/slickspeed/">Options</a> (this is an old one)</li>
+				<li>My pick: jQuery (strong buy)
+					<ul>
+						<li>High performance</li>
+						<li>High maturity</li>
+						<li>High extensibility</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="2000" data-y="-1500">
+			<h1>Application Frameworks</h1>
+			<ul>
+				<li>Highly extensible</li>
+				<li>Minimal DOM dependency</li>
+				<li>Light weight</li>
+				<li>Separation of concerns</li>
+				<li>Options
+					<ul>
+						<li><a href=""></a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="3000" data-y="-1500">
+			<h1>Application Frameworks (cont.)</h1>
+			<ul>
+				<li>My pick: Bacokbone (strong buy)
+					<ul>
+						<li>Very light weight</li>
+						<li>Event driven</li>
+						<li>Concept of mixin</li>
+						<li>Deeplink routing support</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
 </body>
 </html>
