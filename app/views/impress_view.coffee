@@ -43,6 +43,7 @@ module.exports = class ImpressView extends View
 		'left': 'prev'
 		'right': 'next'
 		'⌥ + n': 'next'
+		'⌥ + b': 'prev'
 
 
 	initialize: ->
